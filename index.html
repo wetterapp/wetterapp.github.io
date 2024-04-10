@@ -1,179 +1,131 @@
 
 <!DOCTYPE html>
-<html lang="en">
+  <html lang="en">
 <head>
-   <meta name="google-site-verification" content="vfAYpdSb4P05v_r7V0f79g2hOKcsb3LOzrkomDJu9Uw" />
-    
-    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="vfAYpdSb4P05v_r7V0f79g2hOKcsb3LOzrkomDJu9Uw" />
+   <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
- 
- .hc {            border: 2px solid #1e1e1e;            border-radius: 10px;            padding: 1rem;  width: 15%; background-color: #1e1e1e; 
-margin-left: 40%; }
-      body  {
+</head>    
+   <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:'Times New Roman', Times, serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #171717;
-           
+            color: #fff;
+            transition: background-color 0.5s ease;
         }
         
-        .container {
-            background: #171717;
-            color: #fff;
-            padding: 2rem;
-            width: 40%;
-            margin: 4rem auto;
+        :root {
+            --background-color-day: lightblue;
+            --background-color-night: darkblue;
+            --background-color-cloudy: #9E9E9E;
+            --background-color-rainy: #5075A4;
+            --background-color-sunny: #FFD54F;
+        }
+
+
+
+        .weather__search, .container, .hc {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
             border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
-        .weather__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        input {
+
+        .weather__search input {
+            width: calc(100% - 40px);
+            padding: 10px;
             border: none;
-            background: #1e1e1e;
-            outline: none;
+            background: #272727;
             color: #fff;
-            padding: 0.5rem 2.5rem;
             border-radius: 5px;
         }
-        
-        input::placeholder {
+
+        .weather__search input::placeholder {
             color: #fff;
         }
-        
-        .weather__search {
-            position: relative; /* Changed to relative */
-            margin-bottom: 20px; /* Added margin-bottom */
-           margin-left: 40%;
-           margin-top:5%;
-           height: 3%;
-       
-        }
-        
-        .weather__search i {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 15px;
-            color: #fff;
-        }
-        
-        .weather__units {
-            font-size: 1.5rem;
-        }
-        
-        .weather__units span {
-            cursor: pointer;
-        }
-        
-        .weather__units span:first-child {
-            margin-right: 0.5rem;
-        }
-        
-        .weather__body {
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
-        .weather__datetime {
-            margin-bottom: 2rem;
-            font-size: 14px;
-        }
-        
-        .weather__forecast {
-            background: #1e1e1e;
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-        }
-        
+
         .weather__icon img {
             width: 100px;
+            animation: fadeIn 2s;
         }
-        
+
         .weather__temperature {
-            font-size: 1.75rem;
+            font-size: 2rem;
+            font-weight: 600;
         }
-        
-        .weather__minmax {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .weather__minmax p {
-            font-size: 14px;
-            margin: 0.5rem;
-        }
-        
+
         .weather__info {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 1rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
         }
-        
+
         .weather__card {
             display: flex;
             align-items: center;
-            background: #1e1e1e;
-            padding: 1rem;
+            justify-content: start;
+            padding: 10px;
+            background: #272727;
             border-radius: 10px;
         }
-        
+
         .weather__card i {
-            font-size: 1.5rem;
-            margin-right: 1rem;
+            margin-right: 10px;
+            font-size: 24px;
         }
-        
-        .history {
-            color: #fff;
-            font-size: 14px;
-            margin-top: 20px;
-            align-items: center;
-           
-        }
-        
+
         .history ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
-           
         }
-        
+
         .history ul li {
-            margin-bottom: 5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
-        
-        @media(max-width: 936px){
-            .container {
-                width: 90%;
+
+        .history ul li:hover {
+            color: #4e9af1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-        
-            .weather__header {
-                flex-direction: column;
-            }
-        
-            .weather__units {
-                margin-top: 1rem;
-            
+            to {
+                opacity: 1;
             }
         }
-        
-        
-        @media(max-width: 400px){
+
+        @media(max-width: 768px){
             .weather__info {
-                grid-template-columns: none;
+                grid-template-columns: repeat(2, 1fr);
             }
-        } </style>
+        }
+
+        @media(max-width: 480px){
+            .weather__search, .container, .hc {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .weather__search input {
+                padding: 8px;
+            }
+
+            .weather__icon img {
+                width: 80px;
+            }
+        }
+    </style>
 </head>
 <body>
     <form class="weather__search">
@@ -238,6 +190,9 @@ margin-left: 40%; }
                     <p>Pressure</p>
                     <p class="weather__pressure">18&#176</p>
                 </div>
+                
+            
+            
             </div>
         </div>
 
@@ -248,26 +203,49 @@ margin-left: 40%; }
    
   
     <script>
-        function updateBackgroundImage(timezoneOffset) {
-            const body = document.getElementById('body'); // Get the body element by its ID
+   
+   function updateBackgroundColor(weatherCondition) {
+    const body = document.getElementById('body'); // Ensure the body has an ID of 'body'
+    if (weatherCondition.includes('cloud')) {
+        body.style.backgroundColor = document.documentElement.style.getPropertyValue('--background-color-cloudy');
+    } else if (weatherCondition.includes('rain')) {
+        body.style.backgroundColor = document.documentElement.style.getPropertyValue('--background-color-rainy');
+    } else {
+        body.style.backgroundColor = document.documentElement.style.getPropertyValue('--background-color-sunny');
+    }
+}
+
+    
+    weather__icon.innerHTML = `<img src="/path/to/icons/${iconName}.png" alt="Weather Icon" />`;
+       
+       function updateBackgroundImage(timezoneOffset) {
+            const body = document.getElementById('body'); // Correctly reference the body element by its ID
             const currentHour = (new Date().getUTCHours() + (timezoneOffset / 3600)) % 24;
     
             if (currentHour >= 6 && currentHour < 18) {
-                body.style.backgroundImage = 'url(daytime.jpg)'; // Daytime image URL
+                body.style.backgroundColor = 'lightblue'; // Daytime color
             } else {
-                body.style.backgroundImage = 'url(nighttime.jpg)'; // Nighttime image URL
+                body.style.backgroundColor = 'darkblue'; // Nighttime color
             }
         }
     
-        // Initial Weather Fetch
+        // Initial setup
         document.addEventListener('DOMContentLoaded', () => {
-            // Get the timezone offset from the user or any other appropriate source
-            const timezoneOffset = new Date().getTimezoneOffset() * 60; // Get the timezone offset in seconds
+            // Assume the timezone offset in seconds (it might be positive or negative)
+            const timezoneOffset = new Date().getTimezoneOffset() * -60; // Correct calculation for the timezone offset
     
             updateBackgroundImage(timezoneOffset);
             getWeather();
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            getWeather();
+            // Add any necessary event listeners
+        });
+    
+    
+    
     </script>
+    
    
   
   
