@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+ 
+ .hc {            border: 2px solid #1e1e1e;            border-radius: 10px;            padding: 1rem;  width: 15%; background-color: #1e1e1e;   }
+      body  {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background-color: #171717;
+           
+        }
+        
+        .container {
+            background: #171717;
+            color: #fff;
+            padding: 2rem;
+            width: 40%;
+            margin: 4rem auto;
+            border-radius: 10px;
+        }
+        
+        .weather__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        input {
+            border: none;
+            background: #1e1e1e;
+            outline: none;
+            color: #fff;
+            padding: 0.5rem 2.5rem;
+            border-radius: 5px;
+        }
+        
+        input::placeholder {
+            color: #fff;
+        }
+        
+        .weather__search {
+            position: relative; /* Changed to relative */
+            margin-bottom: 20px; /* Added margin-bottom */
+        }
+        
+        .weather__search i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: #fff;
+        }
+        
+        .weather__units {
+            font-size: 1.5rem;
+        }
+        
+        .weather__units span {
+            cursor: pointer;
+        }
+        
+        .weather__units span:first-child {
+            margin-right: 0.5rem;
+        }
+        
+        .weather__body {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .weather__datetime {
+            margin-bottom: 2rem;
+            font-size: 14px;
+        }
+        
+        .weather__forecast {
+            background: #1e1e1e;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+        }
+        
+        .weather__icon img {
+            width: 100px;
+        }
+        
+        .weather__temperature {
+            font-size: 1.75rem;
+        }
+        
+        .weather__minmax {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .weather__minmax p {
+            font-size: 14px;
+            margin: 0.5rem;
+        }
+        
+        .weather__info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .weather__card {
+            display: flex;
+            align-items: center;
+            background: #1e1e1e;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        .weather__card i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .history {
+            color: #fff;
+            font-size: 14px;
+            margin-top: 20px;
+           
+        }
+        
+        .history ul {
+            list-style-type: none;
+            padding: 0;
+           
+        }
+        
+        .history ul li {
+            margin-bottom: 5px;
+        }
+        
+        @media(max-width: 936px){
+            .container {
+                width: 90%;
+            }
+        
+            .weather__header {
+                flex-direction: column;
+            }
+        
+            .weather__units {
+                margin-top: 1rem;
+            }
+        }
+        
+        
+        @media(max-width: 400px){
+            .weather__info {
+                grid-template-columns: none;
+            }
+        } </style>
+</head>
+<body>
+    <form class="weather__search">
+        <input type="text" placeholder="Search for a city..." class="weather__searchform">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </form> 
+    <div class="hc">
+    <div class="history">
+        <p>Search History:</p>
+        <ul>
+            <!-- List items for history will be dynamically added here -->
+        </ul>
+    </div>
+    </div>
+    <div class="container">
+        <div class="weather__header">
+            <div class="weather__units">
+                <span class="weather_unit_celsius">&#176C</span>
+                <span class="weather_unit_farenheit">&#176F</span>
+            </div>
+        </div>
+        <div class="weather__body">
+            <h1 class="weather__city"></h1>
+            <div class="weather__datetime">
+            </div>
+            <div class="weather__forecast"></div>
+            <div class="weather__icon">
+            </div>
+            <p class="weather__temperature">
+            </p>
+            <div class="weather__minmax">
+                <p>Min: 12&#176</p>
+                <p>Max: 16&#176</p>
+            </div>
+        </div>
+
+        <div class="weather__info">
+            <div class="weather__card">
+                <i class="fa-solid fa-temperature-full"></i>
+                <div>
+                    <p>Real Feel</p>
+                    <p class="weather__realfeel">18&#176</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-droplet"></i>
+                <div>
+                    <p>Humidity</p>
+                    <p class="weather__humidity">18&#176</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-wind"></i>
+                <div>
+                    <p>Wind</p>
+                    <p class="weather__wind">18&#176</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <div>
+                    <p>Pressure</p>
+                    <p class="weather__pressure">18&#176</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        
+    </div>
+    <script src="https://kit.fontawesome.com/a692e1c39f.js" crossorigin="anonymous"></script>
+   
+  
+    <script>
+        function updateBackgroundImage(timezoneOffset) {
+            const body = document.getElementById('body'); // Get the body element by its ID
+            const currentHour = (new Date().getUTCHours() + (timezoneOffset / 3600)) % 24;
+    
+            if (currentHour >= 6 && currentHour < 18) {
+                body.style.backgroundImage = 'url(daytime.jpg)'; // Daytime image URL
+            } else {
+                body.style.backgroundImage = 'url(nighttime.jpg)'; // Nighttime image URL
+            }
+        }
+    
+        // Initial Weather Fetch
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get the timezone offset from the user or any other appropriate source
+            const timezoneOffset = new Date().getTimezoneOffset() * 60; // Get the timezone offset in seconds
+    
+            updateBackgroundImage(timezoneOffset);
+            getWeather();
+        });
+    </script>
+   
+  
+  
+  
+  <script>  // state
+        let currCity = "Hanover";
+        let units = "metric";
+        
+        // Selectors
+        let city = document.querySelector(".weather__city");
+        let datetime = document.querySelector(".weather__datetime");
+        let weather__forecast = document.querySelector('.weather__forecast');
+        let weather__temperature = document.querySelector(".weather__temperature");
+        let weather__icon = document.querySelector(".weather__icon");
+        let weather__minmax = document.querySelector(".weather__minmax")
+        let weather__realfeel = document.querySelector('.weather__realfeel');
+        let weather__humidity = document.querySelector('.weather__humidity');
+        let weather__wind = document.querySelector('.weather__wind');
+        let weather__pressure = document.querySelector('.weather__pressure');
+        
+        // search
+        document.querySelector(".weather__search").addEventListener('submit', e => {
+            let search = document.querySelector(".weather__searchform");
+            // prevent default action
+            e.preventDefault();
+            // change current city
+            currCity = search.value;
+            // get weather forecast 
+            getWeather();
+            // clear form
+            search.value = "";
+
+            // Add search to history
+            addToHistory(currCity);
+        })
+        
+        // units
+        document.querySelector(".weather_unit_celsius").addEventListener('click', () => {
+            if(units !== "metric"){
+                // change to metric
+                units = "metric"
+                // get weather forecast 
+                getWeather()
+            }
+        })
+        
+        document.querySelector(".weather_unit_farenheit").addEventListener('click', () => {
+            if(units !== "imperial"){
+                // change to imperial
+                units = "imperial"
+                // get weather forecast 
+                getWeather()
+            }
+        })
+        
+        function convertTimeStamp(timestamp, timezone){
+             const convertTimezone = timezone / 3600; // convert seconds to hours 
+        
+            const date = new Date(timestamp * 1000);
+            
+            const options = {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                timeZone: `Etc/GMT${convertTimezone >= 0 ? "-" : "+"}${Math.abs(convertTimezone)}`,
+                hour12: true,
+            }
+            return date.toLocaleString("en-US", options)
+        }
+        
+        // convert country code to name
+        function convertCountryCode(country){
+            let regionNames = new Intl.DisplayNames(["en"], {type: "region"});
+            return regionNames.of(country)
+        }
+        
+        function getWeather(){
+            const API_KEY = '64f60853740a1ee3ba20d0fb595c97d5'
+        
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currCity}&appid=${API_KEY}&units=${units}`).then(res => res.json()).then(data => {
+            console.log(data)
+            city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`
+            datetime.innerHTML = convertTimeStamp(data.dt, data.timezone); 
+            weather__forecast.innerHTML = `<p>${data.weather[0].main}`
+            weather__temperature.innerHTML = `${data.main.temp.toFixed()}&#176`
+            weather__icon.innerHTML = `   <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" />`
+            weather__minmax.innerHTML = `<p>Min: ${data.main.temp_min.toFixed()}&#176</p><p>Max: ${data.main.temp_max.toFixed()}&#176</p>`
+            weather__realfeel.innerHTML = `${data.main.feels_like.toFixed()}&#176`
+            weather__humidity.innerHTML = `${data.main.humidity}%`
+            weather__wind.innerHTML = `${data.wind.speed} ${units === "imperial" ? "mph": "m/s"}` 
+            weather__pressure.innerHTML = `${data.main.pressure} hPa`
+        })
+        }
+        
+        // Function to add search to history
+        function addToHistory(city) {
+            const historyList = document.querySelector('.history ul');
+            const listItem = document.createElement('li');
+            listItem.textContent = city;
+            historyList.appendChild(listItem);
+        }
+
+        // Initial Weather Fetch
+        document.addEventListener('DOMContentLoaded', getWeather());
+    </script>
+<script>
+    // Other JavaScript code remains the same...
+
+    // Function to add search to history
+    function addToHistory(city) {
+        const historyList = document.querySelector('.history ul');
+        const listItem = document.createElement('li');
+        listItem.textContent = city;
+        listItem.addEventListener('click', () => {
+            document.querySelector(".weather__searchform").value = city;
+        });
+        historyList.appendChild(listItem);
+    }
+
+    // Initial Weather Fetch
+    document.addEventListener('DOMContentLoaded', () => {
+        getWeather();
+        // Add event listeners to existing history items
+        document.querySelectorAll('.history ul li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelector(".weather__searchform").value = item.textContent;
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>
